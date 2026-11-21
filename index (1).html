@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word2Vec</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+    <div class="tags">
+        <span class="badge">NLP SERIES</span>
+        <span class="category">LANGUAGE MODELLING</span>
+    </div>
+
+    <h1>Word2Vec</h1>
+    <p>Learn how Word2Vec turns words into vectors by looking at the words around them. Pick context words, build training pairs, count them, and compare vectors. Start with the warm-up, then complete the 10 tasks, which go from easy to hard.</p>
+</header>
+
+<main>
+    <section class="section">
+        <p class="section-label">QUICK REFERENCE</p>
+        <div class="concept-card">
+            <h2>Word2Vec learns a vector for every word from its neighbours</h2>
+            <div class="ref-grid three">
+                <div class="ref-card">
+                    <strong>Word embedding</strong>
+                    <p>A word turned into a vector (a list of numbers). Similar words get similar vectors.</p>
+                    <span class="ex">cat → (0.2, 0.7, …)</span>
+                </div>
+                <div class="ref-card">
+                    <strong>CBOW</strong>
+                    <p>Predicts the centre word from its context words.</p>
+                    <span class="ex">the, cat, on, a → sat</span>
+                </div>
+                <div class="ref-card">
+                    <strong>Skip-gram</strong>
+                    <p>Predicts the context words from the centre word.</p>
+                    <span class="ex">sat → the, cat, on, a</span>
+                </div>
+            </div>
+            <p class="note-line">The window size w is how many words on each side of the centre word count as context. Examples here are lowercase and have no punctuation.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <p class="section-label">FORMULA</p>
+        <div class="concept-card formula-card">
+            <h2>Two formulas to know</h2>
+            <div class="formula-eq">context words ≤ 2 × w</div>
+            <p class="formula-how">w is the window size. There are fewer context words near the start or end of a sentence.</p>
+            <div class="formula-eq">cosine similarity = (a · b) ÷ (|a| × |b|)</div>
+            <p class="formula-how">It ranges from −1 (opposite) to 1 (same direction). Example: a = (1, 0) and b = (1, 1) give 1 ÷ (1 × 1.41) = 0.71.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <p class="section-label">WARM-UP</p>
+        <div class="concept-card interactive-card">
+            <h2>Click the context words of "chased"</h2>
+            <p>The window size here is 1: one word on each side of the centre word. Click the context words of "chased" in "the dog chased a cat", then check your selection. Click a selected word again to deselect it.</p>
+
+            <div class="sentence-selector" id="practiceSentence"></div>
+            <div class="selection-legend">
+                <span><i class="legend-dot selected-dot"></i> Selected</span>
+                <span><i class="legend-dot content-dot"></i> Not selected</span>
+            </div>
+            <button onclick="checkPractice()">Check Selection</button>
+            <div id="practiceFeedback" class="feedback"></div>
+            <div id="practiceResult" class="practice-result"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <p class="section-label">YOUR TASK</p>
+        <div class="concept-card task-card">
+            <div class="task-header">
+                <div>
+                    <h2>Word2Vec Challenge</h2>
+                    <p class="task-instruction" id="questionInstruction"></p>
+                </div>
+                <div class="question-counter">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span></div>
+            </div>
+
+            <div class="level-key">
+                <span><i style="background:#2e9d5b"></i>Easy</span>
+                <span><i style="background:#d08a1f"></i>Medium</span>
+                <span><i style="background:#d6455a"></i>Hard</span>
+            </div>
+            <div class="progress-strip" id="progressStrip" role="group" aria-label="Jump to a question"></div>
+
+            <div class="question-box" id="questionBox"></div>
+            <div id="taskArea"></div>
+            <div class="selection-status" id="selectionStatus"></div>
+
+            <button onclick="checkAnswer()" id="checkButton">Check Answer</button>
+            <div id="feedback" class="feedback"></div>
+            <div id="explainBox" class="explain-box"></div>
+
+            <div class="question-navigation">
+                <button onclick="previousQuestion()" id="previousButton" class="navigation-button previous-button">← Previous</button>
+                <button onclick="nextQuestion()" id="nextButton" class="navigation-button next-button">Next →</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
